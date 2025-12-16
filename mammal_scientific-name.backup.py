@@ -176,41 +176,7 @@ def main():
         for name in valid_mammal_species:
             f.write(f"{name}\n")
     
-    # 統計レポートを保存
-    stats_file = "mammal_statistics.txt"
-    with open(stats_file, 'w', encoding='utf-8') as f:
-        f.write("=" * 60 + "\n")
-        f.write("NCBI Taxonomy 哺乳類学名抽出 統計レポート\n")
-        f.write("=" * 60 + "\n\n")
-        
-        f.write(f"処理日時: 2025年12月17日\n")
-        f.write(f"対象分類群: Mammalia (tax_id: {MAMMALIA_TAX_ID})\n\n")
-        
-        f.write("【抽出結果】\n")
-        f.write(f"  哺乳類の全子孫ノード数: {len(descendants):,}\n")
-        f.write(f"  種レベル (rank=species) の総数: {len(all_mammal_species):,}\n")
-        f.write(f"  確定した学名 (有効): {len(valid_mammal_species):,}\n")
-        f.write(f"  除外された学名 (暫定的): {len(all_mammal_species) - len(valid_mammal_species):,}\n\n")
-        
-        exclusion_count = len(all_mammal_species) - len(valid_mammal_species)
-        if len(all_mammal_species) > 0:
-            valid_percent = (len(valid_mammal_species) / len(all_mammal_species)) * 100
-            excluded_percent = (exclusion_count / len(all_mammal_species)) * 100
-            f.write("【割合】\n")
-            f.write(f"  有効な学名: {valid_percent:.2f}%\n")
-            f.write(f"  除外された学名: {excluded_percent:.2f}%\n\n")
-        
-        f.write("【除外基準】\n")
-        f.write("  - sp., cf., aff., x を含む名前\n")
-        f.write("  - isolate, haplotype などの識別子\n")
-        f.write("  - カッコや数字コードを含む名前\n")
-        f.write("  - 2語または3語以外の名前\n")
-        f.write("  - 大文字小文字のパターンが不適切な名前\n\n")
-        
-        f.write("=" * 60 + "\n")
-    
     print(f"\nResults saved to {output_file}")
-    print(f"Statistics saved to {stats_file}")
     print(f"Total confirmed species names: {len(valid_mammal_species)}")
 
 
